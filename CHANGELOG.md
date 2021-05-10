@@ -17,3 +17,7 @@
 ## 1.0.3
 
 * fix: adapt the json result and add accent support.
+
+## 1.0.4
+
+* fix: fix.
