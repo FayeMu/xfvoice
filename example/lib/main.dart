@@ -24,10 +24,10 @@ class _MyApp extends State<MyApp> {
    Future<void> initPlatformState() async {
     final voice = XFVoice.shared;
     // 请替换成你的appid
-    voice.init(appIdIos: '5d133a41', appIdAndroid: '5d133aae');
+    voice.init(appIdIos: '934365e1', appIdAndroid: '934365e1');
     final param = new XFVoiceParam();
     param.domain = 'iat';
-    // param.asr_ptt = '0';   //取消注释可去掉标点符号
+    param.asr_ptt = '0';   //取消注释可去掉标点符号
     param.asr_audio_path = 'audio.pcm';
     param.result_type = 'json'; //可以设置plain
     final map = param.toMap();
