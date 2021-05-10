@@ -2,7 +2,7 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 Pod::Spec.new do |s|
-  s.name             = 'xfvoice'
+  s.name             = 'xfvoice2'
   s.version          = '0.0.1'
   s.summary          = '科大讯飞语音识别插件'
   s.description      = <<-DESC
@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.libraries = 'c++', 'z'
   s.vendored_frameworks = 'Frameworks/iflyMSC.framework'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 end
 
