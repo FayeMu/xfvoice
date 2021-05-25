@@ -1,6 +1,6 @@
 name: xfvoice2
 description: 科大讯飞语音识别插件(Plugin for xunfei voice detaction)
-version: 1.0.6
+version: 1.0.7
 homepage: https://github.com/ligun123/xfvoice.git
 
 environment:
