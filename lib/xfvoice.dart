@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 //  "${PODS_ROOT}/Frameworks/xfvoice/Frameworks"
@@ -19,7 +18,7 @@ class XFVoice {
   XFVoice._();
 
   Future<void> init(
-      {@required String appIdIos, @required String appIdAndroid}) async {
+      {required String appIdIos, required String appIdAndroid}) async {
     if (Platform.isIOS) {
       await _channel.invokeMethod('init', appIdIos);
     }
@@ -37,27 +36,27 @@ class XFVoice {
     await _channel.invokeMethod('setParameter', param);
   }
 
-  Future<void> start({XFVoiceListener listener}) async {
+  Future<void> start({XFVoiceListener? listener}) async {
     _channel.setMethodCallHandler((MethodCall call) async {
       if (call.method == 'onCancel' && listener?.onCancel != null) {
-        listener.onCancel();
+        listener?.onCancel?.call();
       }
       if (call.method == 'onBeginOfSpeech' &&
           listener?.onBeginOfSpeech != null) {
-        listener.onBeginOfSpeech();
+        listener?.onBeginOfSpeech?.call();
       }
       if (call.method == 'onEndOfSpeech' && listener?.onEndOfSpeech != null) {
-        listener.onEndOfSpeech();
+        listener?.onEndOfSpeech?.call();
       }
       if (call.method == 'onCompleted' && listener?.onCompleted != null) {
-        listener.onCompleted(call.arguments[0], call.arguments[1]);
+        listener?.onCompleted?.call(call.arguments[0], call.arguments[1]);
       }
       if (call.method == 'onResults' && listener?.onResults != null) {
-        listener.onResults(call.arguments[0], call.arguments[1]);
+        listener?.onResults?.call(call.arguments[0], call.arguments[1]);
       }
       if (call.method == 'onVolumeChanged' &&
           listener?.onVolumeChanged != null) {
-        listener.onVolumeChanged(call.arguments);
+        listener?.onVolumeChanged?.call(call.arguments);
       }
     });
     await _channel.invokeMethod('start');
@@ -84,14 +83,14 @@ class XFVoice {
 /// 讯飞语音识别的回调映射，有flutter来决定处理所有的回调结果，
 /// 会更具有灵活性
 class XFVoiceListener {
-  VoidCallback onCancel;
-  VoidCallback onEndOfSpeech;
-  VoidCallback onBeginOfSpeech;
+  VoidCallback? onCancel;
+  VoidCallback? onEndOfSpeech;
+  VoidCallback? onBeginOfSpeech;
 
   /// error信息构成的key-value map，[filePath]是音频文件路径
-  void Function(Map<dynamic, dynamic> error, String filePath) onCompleted;
-  void Function(String result, bool isLast) onResults;
-  void Function(int volume) onVolumeChanged;
+  void Function(Map<dynamic, dynamic> error, String filePath)? onCompleted;
+  void Function(String result, bool isLast)? onResults;
+  void Function(int volume)? onVolumeChanged;
 
   XFVoiceListener(
       {this.onBeginOfSpeech,
@@ -158,13 +157,13 @@ class XFVoiceListener {
 }
  */
 class XFJsonResult {
-  int sn;
-  bool ls;
-  int bg;
-  int ed;
-  String pgs;
-  List rg;
-  List ws;
+  int? sn;
+  bool? ls;
+  int? bg;
+  int? ed;
+  String? pgs;
+  List? rg;
+  List? ws;
 
   XFJsonResult(String jsonResult) {
     final json = jsonDecode(jsonResult);
@@ -185,16 +184,16 @@ class XFJsonResult {
     this.ed = another.ed;
     this.rg = another.rg;
     if (another.pgs == 'apd') {
-      this.ws.addAll(another.ws);
+      this.ws?.addAll(another.ws ?? []);
     } else {
       this.ws = another.ws;
     }
   }
 
-  String resultText() {
+  String? resultText() {
     final resultStr = this
         .ws
-        .map((element) {
+        ?.map((element) {
           List cw = element['cw'];
           if (cw == null || cw.length == 0) {
             return '';
@@ -209,50 +208,50 @@ class XFJsonResult {
 }
 
 class XFVoiceParam {
-  String accent;
-  String speech_timeout;
-  String domain;
-  String result_type;
-  String timeout;
-  String power_cycle;
-  String sample_rate;
-  String engine_type;
-  String local;
-  String cloud;
-  String mix;
-  String auto;
-  String text_encoding;
-  String result_encoding;
-  String player_init;
-  String player_deactive;
-  String recorder_init;
-  String recorder_deactive;
-  String speed;
-  String pitch;
-  String tts_audio_path;
-  String vad_enable;
-  String vad_bos;
-  String vad_eos;
-  String voice_name;
-  String voice_id;
-  String voice_lang;
-  String volume;
-  String tts_buffer_time;
-  String tts_data_notify;
-  String next_text;
-  String mpplayinginfocenter;
-  String audio_source;
-  String asr_audio_path;
-  String asr_sch;
-  String asr_ptt;
-  String local_grammar;
-  String cloud_grammar;
-  String grammar_type;
-  String grammar_content;
-  String lexicon_content;
-  String lexicon_name;
-  String grammar_list;
-  String nlp_version;
+  String? accent;
+  String? speech_timeout;
+  String? domain;
+  String? result_type;
+  String? timeout;
+  String? power_cycle;
+  String? sample_rate;
+  String? engine_type;
+  String? local;
+  String? cloud;
+  String? mix;
+  String? auto;
+  String? text_encoding;
+  String? result_encoding;
+  String? player_init;
+  String? player_deactive;
+  String? recorder_init;
+  String? recorder_deactive;
+  String? speed;
+  String? pitch;
+  String? tts_audio_path;
+  String? vad_enable;
+  String? vad_bos;
+  String? vad_eos;
+  String? voice_name;
+  String? voice_id;
+  String? voice_lang;
+  String? volume;
+  String? tts_buffer_time;
+  String? tts_data_notify;
+  String? next_text;
+  String? mpplayinginfocenter;
+  String? audio_source;
+  String? asr_audio_path;
+  String? asr_sch;
+  String? asr_ptt;
+  String? local_grammar;
+  String? cloud_grammar;
+  String? grammar_type;
+  String? grammar_content;
+  String? lexicon_content;
+  String? lexicon_name;
+  String? grammar_list;
+  String? nlp_version;
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> param = {

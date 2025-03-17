@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:xfvoice/xfvoice.dart';
+import 'package:xfvoice2/xfvoice.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,9 +11,9 @@ class MyApp extends StatefulWidget {
 
 class _MyApp extends State<MyApp> {
   String voiceMsg = '暂无数据';
-  String iflyResultString = '按下方块说话';
+  String? iflyResultString = '按下方块说话';
 
-  XFJsonResult xfResult;
+  late XFJsonResult? xfResult;
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _MyApp extends State<MyApp> {
         body: Center(
           child: GestureDetector(
             child: Container(
-              child: Text(iflyResultString),
+              child: Text(iflyResultString ?? ''),
               width: 300.0,
               height: 300.0,
               color: Colors.blueAccent,
@@ -78,11 +78,11 @@ class _MyApp extends State<MyApp> {
           xfResult = XFJsonResult(result);
         } else {
           final another = XFJsonResult(result);
-          xfResult.mix(another);
+          xfResult?.mix(another);
         }
         if (result.length > 0) {
           setState(() {
-            iflyResultString = xfResult.resultText();
+            iflyResultString = xfResult?.resultText();
           });
         }
       },
