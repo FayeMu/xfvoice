@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:xfvoice2/xfvoice.dart';
+import 'package:xfvoice2/xfvoice2.dart';
 
 void main() => runApp(MyApp());
 

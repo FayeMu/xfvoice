@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
@@ -195,7 +194,7 @@ class XFJsonResult {
         .ws
         ?.map((element) {
           List cw = element['cw'];
-          if (cw == null || cw.length == 0) {
+          if (cw.length == 0) {
             return '';
           } else {
             return cw[0]['w'] as String;

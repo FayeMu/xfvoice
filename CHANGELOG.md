@@ -33,3 +33,7 @@
 ## 1.0.7
 
 * fix: fix.
+
+## 2.0.0
+
+* fix: null safety.
